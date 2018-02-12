@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Loader extends Component{
   render(){
     return(
-      <div className="preloader-wrapper big active">
+      <div className="preloader-wrapper small active">
         <div className="spinner-layer spinner-blue">
           <div className="circle-clipper left">
             <div className="circle"></div>

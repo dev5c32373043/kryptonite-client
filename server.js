@@ -31,7 +31,7 @@ if(NODE_ENV == 'production'){
   });
 }
 
-app.get('/fonts*', (req, res)=>{
+app.get('/materialize-css/dist/fonts*', (req, res)=>{
   res.sendFile(`${__dirname}/node_modules/materialize-css/dist/${req.url}`);
 })
 

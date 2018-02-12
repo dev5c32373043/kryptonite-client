@@ -14,10 +14,12 @@ export default class Home extends Component{
     }
   }
   render(){
+    const { loading } = this.props;
     return (
       <Fragment>
         <Header />
         {this.isCurrenciesReceived.call(this)}
+        {loading && <Loader />}
       </Fragment>
     )
   }
