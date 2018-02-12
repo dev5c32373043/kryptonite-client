@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import 'regenerator-runtime/runtime'
+import socketMiddleware from './middlewares/socket';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 import reducers from './reducers';
@@ -16,7 +17,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   reducers,
-  applyMiddleware(sagaMiddleware, routerM)
+  applyMiddleware(sagaMiddleware, routerM, socketMiddleware)
 )
 sagaMiddleware.run(rootSaga);
 
