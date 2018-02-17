@@ -1,7 +1,11 @@
 import io from 'socket.io-client';
 
+import { INIT_SOCKET_CONNECT } from '../constants/socket';
 import { GET_CURRENCIES, LOAD_MORE } from '../constants/Home';
+import { GET_KEYS } from '../constants/Converter';
+
 import homeActions from '../actions/Home';
+import converterActions from '../actions/Converter';
 
 const server = (location.origin.includes('localhost') ? 'http://localhost:3000' : 'https://kryptonite-api.herokuapp.com');
 const socket = io(server, {
@@ -41,18 +45,30 @@ const socketMiddleware = store => next => action => {
         loading: false
       }))
     });
-    socket.emit('get currencies')
+
+    socket.on('keys received', (keys)=>{
+      dispatch(converterActions.keysReceived({
+        keys: keys,
+        dataReceived: true
+      }))
+    })
   }
 
   switch (action.type) {
-    case GET_CURRENCIES:
+    case INIT_SOCKET_CONNECT:
       defineActions()
+      break;
+    case GET_CURRENCIES:
+      socket.emit('get currencies')
       break;
     case LOAD_MORE:
       const { loading, currentPage, maxPage } = store.getState().homeState;
       if(!loading && currentPage + 1 <= maxPage){
         socket.emit('load more', currentPage)
       }
+      break;
+    case GET_KEYS:
+      socket.emit('get keys')
       break;
   }
   next(action)

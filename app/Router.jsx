@@ -3,18 +3,19 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import { history } from './store';
 
-import Home     from './containers/Home';
-import NotFound from './components/error/NotFound';
+import RouteWithLayout from './RouteWithLayout';
+import Home      from './containers/Home';
+import Converter from './containers/Converter';
+import NotFound  from './components/error/NotFound';
 
-export default class Router extends Component{
-  render(){
-    return(
-      <ConnectedRouter history={history}>
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route component={NotFound} />
-        </Switch>
-      </ConnectedRouter>
-    )
-  }
-}
+const Router = props => (
+  <ConnectedRouter history={history}>
+    <Switch>
+      <RouteWithLayout exact path='/'     component={Home} />
+      <RouteWithLayout exact path='/converter'  component={Converter} />
+      <Route component={NotFound} />
+    </Switch>
+  </ConnectedRouter>
+)
+
+export default Router;

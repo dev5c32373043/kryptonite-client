@@ -1,0 +1,11 @@
+.valign-wrapper{
+  justify-content: center;
+}
+
+.converter-form{
+  @extend .card-panel;
+  flex: .3;
+  @media only screen and (max-width: 768px){
+    flex: 1;
+  }
+}

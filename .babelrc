@@ -1,6 +1,6 @@
 {
   "presets": [
-    "es2015", "react"
+    "env", "react"
   ],
-  "plugins": ["regenerator-transform"]
+  "plugins": ["babel-plugin-transform-object-rest-spread"]
 }

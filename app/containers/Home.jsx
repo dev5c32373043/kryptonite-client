@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { push }  from 'react-router-redux';
 import Home from '../components/Home';
 import homeActions from '../actions/Home';
 
@@ -8,14 +8,6 @@ class HomeContainer extends Component{
   componentWillMount(){
     const { dataReceived, getCurrencies, loadMore } = this.props;
     if(!dataReceived) getCurrencies()
-  }
-  componentDidMount(){
-    const html = document.querySelector('html');
-    document.addEventListener('scroll', (e)=>{
-      const { loading, loadMore } = this.props;
-      const currentPosition = Math.round(html.scrollHeight  - html.scrollTop);
-      if(!loading && currentPosition == html.clientHeight) loadMore()
-    })
   }
   render(){
     return <Home {...this.props} />
@@ -36,6 +28,12 @@ const mapDispatchToProps = (dispatch)=>({
   },
   loadMore(){
     dispatch(homeActions.loadMore(true))
+  },
+  goToHome(){
+    dispatch(push('/'))
+  },
+  goToConverter(){
+    dispatch(push('/converter'))
   }
 })
 

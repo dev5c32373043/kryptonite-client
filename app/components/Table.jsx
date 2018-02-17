@@ -3,6 +3,38 @@ import React, { Component } from 'react';
 const icons = require('../icons.json');
 
 export default class Table extends Component {
+  constructor(props){
+    super(props)
+    this.loadMoreHandler = this.loadMoreHandler.bind(this);
+  }
+  componentDidMount(){
+    document.body.onresize = this.loadMoreHandler;
+    this.loadMoreHandler()
+  }
+  componentWillUnmount(){
+    const target = (innerWidth <= 992 ? 'tbody' : 'html');
+    document.querySelector(target)
+    .removeEventListener('scroll', this.loadMoreHandler)
+  }
+  loadMoreHandler(){
+    if(location.pathname == '/'){
+      const target = (innerWidth <= 992 ? 'tbody' : 'html'),
+      element = document.querySelector(target);
+      (element.nodeName == 'TBODY' ? element : document)
+      .addEventListener('scroll', (e)=>{
+        const { loading, loadMore } = this.props,
+        isVerticalScroll = (target == 'html'),
+        options = {
+          dimension: isVerticalScroll ? 'Height' : 'Width',
+          scroll: isVerticalScroll ? 'Top' : 'Left'
+        };
+        const currentPosition = Math.round(
+          element[`scroll${options.dimension}`] - element[`scroll${options.scroll}`]
+        );
+        if(!loading && currentPosition == element[`client${options.dimension}`]) loadMore()
+      })
+    }
+  }
   renderCurrencies(){
     const { currencies } = this.props;
     return currencies.map((currency)=>{
