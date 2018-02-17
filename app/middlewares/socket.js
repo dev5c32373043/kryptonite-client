@@ -52,6 +52,15 @@ const socketMiddleware = store => next => action => {
         dataReceived: true
       }))
     })
+
+    socket.on('currencies updated', (data)=>{
+      const { currencies } = store.getState().homeState;
+      const updatedCurrecies = currencies.map((currency)=>{
+        let updatedCurrency = data.filter((item)=> item.symbol == currency.symbol)[0];
+        return updatedCurrency || currency;
+      })
+      dispatch(homeActions.currenciesUpdated(updatedCurrecies))
+    })
   }
 
   switch (action.type) {

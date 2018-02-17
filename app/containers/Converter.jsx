@@ -18,6 +18,9 @@ class ConverterContainer extends Component{
   componentDidUpdate(prevProps){
     if(!prevProps.dataReceived) this.initSelect();
   }
+  componentWillUnmount(){
+    this.props.reset()
+  }
   initSelect(){
     let elements = document.querySelectorAll('select');
     for(let elem of elements){
@@ -42,6 +45,9 @@ const mapDispatchToProps = (dispatch)=>({
   },
   convert(payload){
     dispatch(converterActions.convert(payload))
+  },
+  reset(){
+    dispatch(converterActions.reset())
   }
 })
 

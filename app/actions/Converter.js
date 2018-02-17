@@ -1,4 +1,4 @@
-import { GET_KEYS, KEYS_RECEIVED, CONVERT, RESULT_RECEIVED } from '../constants/Converter';
+import { GET_KEYS, KEYS_RECEIVED, CONVERT, RESULT_RECEIVED, RESET } from '../constants/Converter';
 
 export default {
   getKeys: ()=>({
@@ -15,5 +15,9 @@ export default {
   converted: (result)=>({
     type: RESULT_RECEIVED,
     result
+  }),
+  reset: ()=>({
+    type: RESET,
+    result: ''
   })
 }

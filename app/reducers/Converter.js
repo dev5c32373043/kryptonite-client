@@ -1,4 +1,4 @@
-import { KEYS_RECEIVED, CONVERT, RESULT_RECEIVED } from '../constants/Converter';
+import { KEYS_RECEIVED, CONVERT, RESULT_RECEIVED, RESET } from '../constants/Converter';
 import { Reducer } from './';
 
 const initState = {
@@ -10,7 +10,8 @@ const initState = {
 const reducerWithActions = Reducer([
   KEYS_RECEIVED,
   CONVERT,
-  RESULT_RECEIVED
+  RESULT_RECEIVED,
+  RESET
 ]);
 
 export default (state = initState, action)=> reducerWithActions(state, action);

@@ -1,4 +1,4 @@
-import { CURRENCIES_RECEIVED, LOAD_MORE, CURRENCIES_LOADED } from '../constants/Home';
+import { CURRENCIES_RECEIVED, LOAD_MORE, CURRENCIES_LOADED, CURRENCIES_UPDATED } from '../constants/Home';
 import { Reducer } from './';
 
 const initState = {
@@ -12,7 +12,8 @@ const initState = {
 const reducerWithActions = Reducer([
   CURRENCIES_RECEIVED,
   LOAD_MORE,
-  CURRENCIES_LOADED
+  CURRENCIES_LOADED,
+  CURRENCIES_UPDATED
 ]);
 
 export default (state = initState, action)=> reducerWithActions(state, action);

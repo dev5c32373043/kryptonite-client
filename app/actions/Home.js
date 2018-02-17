@@ -1,23 +1,27 @@
-import { GET_CURRENCIES, CURRENCIES_RECEIVED, LOAD_MORE, CURRENCIES_LOADED } from '../constants/Home';
+import * as homeConstants from '../constants/Home';
 
 export default {
   getCurrencies: ()=>({
-    type: GET_CURRENCIES
+    type: homeConstants.GET_CURRENCIES
   }),
   currenciesReceived: (payload)=>({
-    type: CURRENCIES_RECEIVED,
+    type: homeConstants.CURRENCIES_RECEIVED,
     currencies: payload.currencies,
     maxPage: payload.maxPage,
     dataReceived: payload.dataReceived
   }),
   loadMore: (loading)=>({
-    type: LOAD_MORE,
+    type: homeConstants.LOAD_MORE,
     loading: loading
   }),
   currenciesLoaded: (payload)=>({
-    type: CURRENCIES_LOADED,
+    type: homeConstants.CURRENCIES_LOADED,
     currencies: payload.currencies,
     currentPage: payload.currentPage,
     loading: payload.loading
+  }),
+  currenciesUpdated: (currencies)=>({
+    type: homeConstants.CURRENCIES_UPDATED,
+    currencies
   })
 }
